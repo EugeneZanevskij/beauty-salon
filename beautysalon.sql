@@ -10,7 +10,9 @@ CREATE TABLE administrator (
 
 CREATE TABLE client (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  fullName VARCHAR(50) NOT NULL,
+  firstName VARCHAR(30) NOT NULL,
+  middleName VARCHAR(30) NOT NULL,
+  lastName VARCHAR(30) NOT NULL,
   phone_number VARCHAR(20),
   email VARCHAR(50),
   birthday DATE
@@ -23,12 +25,18 @@ CREATE TABLE master (
   CHECK (coefficient>=1)
 );
 
+CREATE TABLE category (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  category VARCHAR(40) NOT NULL
+);
+
 CREATE TABLE services (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(50) NOT NULL,
-  category VARCHAR(40) NOT NULL,
+  category_id INT NOT NULL,
   price DECIMAL(10, 2) NOT NULL,
-  duration_minutes INT NOT NULL
+  duration_minutes INT NOT NULL,
+  FOREIGN KEY (category_id) REFERENCES category(id) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
 CREATE TABLE master_services (
